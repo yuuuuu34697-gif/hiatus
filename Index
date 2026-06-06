@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เริ่มต้นเรียนรู้ Vibe Coding - ยุคใหม่ของการเขียนโปรแกรม</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Prompt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        vibe: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base smooth transitions for light/dark mode */
+        body, header, section, div, p, span, h1, h2, h3, h4, h5, h6, select, input, button, textarea {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .dark .glass {
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .dark .gradient-text {
+            background: linear-gradient(135deg, #a78bfa 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans selection:bg-purple-500/30 selection:text-purple-900 dark:selection:text-purple-200">
+
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 glass transition-all duration-300" id="header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="bg-gradient-to-tr from-purple-600 to-pink-500 p-2.5 rounded-xl text-white shadow-lg shadow-purple-500/25">
+                        <i data-lucide="sparkles" class="w-6 h-6 animate-pulse"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-wider gradient-text">Vibe Coding</span>
+                </div>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-1">
+                    <a href="#about" class="px-2 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all">Vibe Coding คืออะไร?</a>
+                    <a href="#why-it-matters" class="px-2 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all">ทำไมต้องสนใจ</a>
+                    <a href="#skills" class="px-2 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all">ทักษะที่จำเป็น</a>
+                    <a href="#tools" class="px-2 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all">เครื่องมือยอดนิยม</a>
+                    <a href="#vibe-test" class="px-2 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all">ทดสอบระดับ Vibe</a>
+                    <a href="#builder" class="px-2 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all">เครื่องมือเขียน Prompt</a>
+                    <a href="#ai-architect-section" class="px-2 py-2 rounded-lg text-sm font-medium text-purple-600 dark:text-purple-400 hover:bg-purple-500/10 transition-all font-semibold">✨ AI ผู้ช่วยอัจฉริยะ</a>
+                </nav>
+
+                <!-- Action Group: Theme Toggle & Developer Badge -->
+                <div class="flex items-center space-x-3">
+                    <!-- Theme Toggle Button (Day/Night) -->
+                    <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-900/5 dark:bg-white/5 text-slate-600 dark:text-slate-300 hover:bg-slate-900/10 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white transition-all border border-slate-200/50 dark:border-white/5" aria-label="Toggle Theme">
+                        <i data-lucide="sun" id="theme-btn-icon" class="w-5 h-5"></i>
+                    </button>
+
+                    <!-- Developer Badge Desk -->
+                    <div class="hidden lg:flex items-center space-x-3 text-xs text-slate-500 dark:text-slate-400 bg-slate-900/5 dark:bg-white/5 px-4 py-2.5 rounded-xl border border-slate-200/50 dark:border-white/10">
+                        <i data-lucide="user" class="w-4 h-4 text-purple-500 dark:text-purple-400"></i>
+                        <span>พัฒนาโดย: <strong class="text-slate-700 dark:text-slate-200">Nurhidayah mudor-asae</strong></span>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-btn" class="p-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 focus:outline-none" aria-label="Toggle Menu">
+                            <i data-lucide="menu" id="menu-icon-open" class="w-6 h-6"></i>
+                            <i data-lucide="x" id="menu-icon-close" class="w-6 h-6 hidden"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="hidden md:hidden glass border-t border-slate-200/50 dark:border-white/5" id="mobile-menu">
+            <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all">Vibe Coding คืออะไร?</a>
+                <a href="#why-it-matters" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all">ทำไมต้องสนใจ</a>
+                <a href="#skills" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all">ทักษะที่จำเป็น</a>
+                <a href="#tools" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all">เครื่องมือยอดนิยม</a>
+                <a href="#vibe-test" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all">ทดสอบระดับ Vibe</a>
+                <a href="#builder" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all">เครื่องมือเขียน Prompt</a>
+                <a href="#ai-architect-section" class="block px-3 py-2.5 rounded-lg text-base font-medium text-purple-600 dark:text-purple-400 hover:bg-purple-500/10 transition-all font-semibold">✨ AI ผู้ช่วยอัจฉริยะ</a>
+                <div class="pt-4 pb-2 border-t border-slate-200/50 dark:border-white/5 mt-4 px-3 text-xs text-slate-500 dark:text-slate-400">
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="user" class="w-4 h-4 text-purple-500 dark:text-purple-400"></i>
+                        <span>ผู้พัฒนา: Nurhidayah mudor-asae</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        <!-- Background Glows -->
+        <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-96 md:h-96 rounded-full bg-purple-600/10 dark:bg-purple-600/20 blur-3xl -z-10 animate-float" style="animation-duration: 8s;"></div>
+        <div class="absolute top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-96 md:h-96 rounded-full bg-pink-500/10 dark:bg-pink-500/20 blur-3xl -z-10 animate-float" style="animation-duration: 10s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center space-x-2 bg-purple-500/10 border border-purple-500/20 dark:border-purple-500/30 px-3.5 py-1.5 rounded-full text-xs sm:text-sm text-purple-700 dark:text-purple-300 mb-6 font-medium">
+                <i data-lucide="wand-2" class="w-4 h-4"></i>
+                <span>The Future of Software Development</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-6">
+                เขียนโปรแกรมด้วย <br>
+                <span class="gradient-text">Vibe Coding</span>
+            </h1>
+            <p class="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-10">
+                เมื่อไอเดียขับเคลื่อนระบบ แทนที่ไวยากรณ์ภาษาคอมพิวเตอร์! สัมผัสวิถีชีวิตนักพัฒนาแนวใหม่ที่ไม่ต้องง้อโค้ดดิ้งแบบเก่า ปล่อยให้ AI จัดการงานหนัก แล้วให้ "Vibe" คอยควบคุมภาพรวม
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#about" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 font-medium text-white shadow-lg shadow-purple-500/20 hover:shadow-purple-500/35 transform hover:-translate-y-0.5 transition-all duration-200 text-center flex items-center justify-center gap-2">
+                    <i data-lucide="compass" class="w-5 h-5"></i> ทำความรู้จักเพิ่มเติม
+                </a>
+                <a href="#vibe-test" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-all text-center flex items-center justify-center gap-2 shadow-sm">
+                    <i data-lucide="star" class="w-5 h-5 text-purple-500 dark:text-purple-400 animate-pulse"></i> เริ่มทำแบบทดสอบ Vibe
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+
+        <!-- What is Vibe Coding (About Section) -->
+        <section id="about" class="pt-20 scroll-mt-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-indigo-500/10 border border-indigo-500/20 dark:border-indigo-500/30 px-3 py-1 rounded-md text-xs text-indigo-700 dark:text-indigo-300 font-medium uppercase tracking-wider">
+                        คำนิยามและการเปลี่ยนผ่าน
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
+                        Vibe Coding <br>
+                        <span class="text-slate-500 dark:text-slate-400">คืออะไรกันแน่?</span>
+                    </h2>
+                    <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+                        <strong>Vibe Coding</strong> (ไวบ์-โค้ดดิ้ง) คือศัพท์สแลงและแนวคิดที่กำลังพูดถึงอย่างกว้างขวางในหมู่นักพัฒนาซอฟต์แวร์ หมายถึง <strong>"การเขียนโปรแกรมที่คุณไม่ต้องพิมพ์โค้ดเองเลยแม้แต่บรรทัดเดียว"</strong> แต่คุณทำหน้าที่ชี้นำ บงการ และจัดทิศทาง (หรือ Vibe) เพื่อให้ระบบปัญญาประดิษฐ์ (AI) เป็นผู้สร้างและแก้ไขโค้ดทั้งหมดตามที่ใจต้องการ
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-400">
+                        ลองจินตนาการถึงวาทยกรผู้ควบคุมวงออร์เคสตรา วาทยกรไม่ได้เป็นคนสีซอหรือเป่าขลุ่ยเอง แต่เป็นผู้ควบคุมภาพรวมทั้งหมดเพื่อให้ได้ผลงานดนตรีที่สมบูรณ์แบบที่สุด นั่นแหละคือบทบาทของคุณในฐานะ Vibe Coder!
+                    </p>
+                    <div class="border-l-4 border-purple-500 bg-purple-500/5 p-4 rounded-r-xl">
+                        <p class="italic text-sm text-purple-700 dark:text-purple-300">
+                            "ในยุคของ Vibe Coding ภาษาคอมพิวเตอร์ที่ดีที่สุด ไม่ใช่ Python, Rust, หรือ TypeScript... แต่คือภาษาไทย/อังกฤษ ที่เราใช้สื่อสารกับ AI ได้อย่างชัดเจน"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature Visual Cards -->
+                <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="bg-white dark:bg-slate-900/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800/80 hover:border-purple-500/30 dark:hover:border-purple-500/30 shadow-sm hover:shadow-md transition-all duration-300">
+                        <div class="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 mb-4">
+                            <i data-lucide="terminal" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">No Syntax, No Stress</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">ลืมเรื่องเครื่องหมายเซมิโคลอน (;) หรือวงเล็บตกหล่นที่หาจุดผิดไม่เจอไปได้เลย AI จะจัดการให้ทุกอย่างสมบูรณ์แบบ</p>
+                    </div>
+                    <div class="bg-white dark:bg-slate-900/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800/80 hover:border-purple-500/30 dark:hover:border-purple-500/30 shadow-sm hover:shadow-md transition-all duration-300">
+                        <div class="w-12 h-12 bg-pink-500/10 rounded-xl flex items-center justify-center text-pink-600 dark:text-pink-400 mb-4">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">พัฒนาอย่างก้าวกระโดด</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">เปลี่ยนไอเดียที่วาดไว้ในกระดาษให้กลายเป็นซอฟต์แวร์ที่ใช้งานได้จริงภายในเวลาเพียงไม่กี่นาที แทนที่จะเป็นสัปดาห์</p>
+                    </div>
+                    <div class="bg-white dark:bg-slate-900/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800/80 hover:border-purple-500/30 dark:hover:border-purple-500/30 shadow-sm hover:shadow-md transition-all duration-300">
+                        <div class="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center text-indigo-650 dark:text-indigo-400 mb-4">
+                            <i data-lucide="messages-square" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">สื่อสารแบบธรรมชาติ</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">คุยกับคอมพิวเตอร์เหมือนคุยกับพนักงานอาวุโสที่มีความรู้ด้านระบบอย่างลึกซึ้ง เพียงแค่อธิบายทิศทางที่คุณอยากให้เป็น</p>
+                    </div>
+                    <div class="bg-white dark:bg-slate-900/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800/80 hover:border-purple-500/30 dark:hover:border-purple-500/30 shadow-sm hover:shadow-md transition-all duration-300">
+                        <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-4">
+                            <i data-lucide="infinity" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">เรียนรู้และพัฒนาต่อยอด</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">ปรับเปลี่ยนโครงสร้าง ออกแบบไอเดียใหม่ ๆ และก้าวข้ามข้อจำกัดด้านทักษะเชิงลึกอย่างยืดหยุ่น</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why It Matters Section -->
+        <section id="why-it-matters" class="pt-24 scroll-mt-20">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center space-x-2 bg-pink-500/10 border border-pink-500/20 dark:border-pink-500/30 px-3 py-1 rounded-md text-xs text-pink-700 dark:text-pink-300 font-medium uppercase tracking-wider mb-3">
+                    อนาคตของโปรแกรมเมอร์
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+                    ทำไม Vibe Coding ถึงมีความสำคัญต่อทุกคน?
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 text-base">
+                    เมื่อกำแพงด้านทักษะที่สูงชันถูกทำลายลงโดยพลังของ Generative AI ทุกคนก็สามารถสร้างสรรค์สิ่งใหม่ได้ด้วยตนเอง
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-gradient-to-b from-white to-slate-100 dark:from-slate-900/80 dark:to-slate-950 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between relative group hover:border-purple-500/30 dark:hover:border-purple-500/30 shadow-sm transition-all duration-300">
+                    <div class="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center font-bold text-lg text-purple-600 dark:text-purple-400 border border-purple-500/20">01</div>
+                    <div class="mt-4">
+                        <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">ขยายขีดความสามารถ (Solopreneur)</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                            คนเพียงคนเดียวที่มีไอเดียและเข้าใจ "Vibes" ของตลาด สามารถพัฒนา สร้าง ทดสอบ และเปิดตัวโปรเจกต์ระดับโลกได้ด้วยตัวคนเดียว โดยไม่จำเป็นต้องว่าจ้างทีมพัฒนาโปรแกรมขนาดใหญ่อีกต่อไป
+                        </p>
+                    </div>
+                    <div class="flex items-center text-xs font-semibold text-purple-600 dark:text-purple-400 space-x-1">
+                        <span>อ่านข้อมูลเคสศึกษา</span> <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-gradient-to-b from-white to-slate-100 dark:from-slate-900/80 dark:to-slate-950 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between relative group hover:border-purple-500/30 dark:hover:border-purple-500/30 shadow-sm transition-all duration-300">
+                    <div class="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-pink-500/10 flex items-center justify-center font-bold text-lg text-pink-600 dark:text-pink-400 border border-pink-500/20">02</div>
+                    <div class="mt-4">
+                        <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">จากนักคิดสู่นักสร้างทันที</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                            ผู้ประกอบการ ดีไซเนอร์ หรือฝ่ายการตลาดสามารถเปลี่ยนแนวคิดหรือโมเดลจำลอง (Mockups) ให้เป็นผลงานชิ้นงานที่ใช้งานได้จริงในทันที (Interactive Prototype) เพื่อนำไปใช้งานได้อย่างรวดเร็ว
+                        </p>
+                    </div>
+                    <div class="flex items-center text-xs font-semibold text-pink-600 dark:text-pink-400 space-x-1">
+                        <span>วิเคราะห์เทรนด์เครื่องมือ</span> <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-gradient-to-b from-white to-slate-100 dark:from-slate-900/80 dark:to-slate-950 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between relative group hover:border-purple-500/30 dark:hover:border-purple-500/30 shadow-sm transition-all duration-300">
+                    <div class="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-indigo-500/10 flex items-center justify-center font-bold text-lg text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">03</div>
+                    <div class="mt-4">
+                        <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">ก้าวข้ามข้อจำกัดทางเทคนิค</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                            ไม่มีคำว่าช้าเกินไปที่จะเริ่มเรียนเขียนโค้ด! คุณไม่จำเป็นต้องเรียนรู้โครงสร้างยากๆ แต่เพียงเข้าใจ Logic, สถาปัตยกรรมระดับกว้าง และวิธีสื่อสารกับ AI ที่ถูกต้องเท่านั้น คุณก็เป็น Vibe Coder มืออาชีพได้แล้ว
+                        </p>
+                    </div>
+                    <div class="flex items-center text-xs font-semibold text-indigo-650 dark:text-indigo-400 space-x-1">
+                        <span>ดูวิธีฝึกฝน Logic</span> <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programming Skills Section (ทักษะการเขียนโปรแกรมยุค Vibe Coding) -->
+        <section id="skills" class="pt-24 scroll-mt-20">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center space-x-2 bg-purple-500/10 border border-purple-500/20 dark:border-purple-500/30 px-3 py-1 rounded-md text-xs text-purple-750 dark:text-purple-300 font-medium uppercase tracking-wider mb-3">
+                    ทักษะใหม่สำหรับการเขียนโปรแกรม
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+                    ทักษะการเขียนโปรแกรมที่เปลี่ยนไปในยุค AI
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400">
+                    เมื่อคุณไม่ต้องจำคำสั่งทุกตัวอักษร ทักษะเหล่านี้คือสิ่งใหม่ที่จะชี้วัดความสามารถที่แท้จริงของคุณ
+                </p>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- 4 Core Skills Cards (Left) -->
+                <div class="lg:col-span-7 space-y-4">
+                    <!-- Skill 1 -->
+                    <div class="bg-white dark:bg-slate-900/50 hover:bg-slate-100/50 dark:hover:bg-slate-900/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-purple-500/20 dark:hover:border-purple-500/20 shadow-sm transition-all flex items-start space-x-4">
+                        <div class="p-3 bg-purple-500/10 rounded-xl text-purple-600 dark:text-purple-400 shrink-0">
+                            <i data-lucide="brain" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100">1. การคิดเชิงตรรกะและการย่อยปัญหา (Systematic Logic)</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                                ทักษะการแบ่งปัญหาใหญ่ออกเป็นปัญหาย่อยๆ (Decomposition) เพราะ AI จะตอบคำสั่งได้ดีที่สุดเมื่อทำงานที่ชัดเจนทีละส่วน การคิดที่เป็นระบบจะช่วยให้คุณเรียงลำดับการสั่งการได้อย่างแม่นยำ
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Skill 2 -->
+                    <div class="bg-white dark:bg-slate-900/50 hover:bg-slate-100/50 dark:hover:bg-slate-900/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-purple-500/20 dark:hover:border-purple-500/20 shadow-sm transition-all flex items-start space-x-4">
+                        <div class="p-3 bg-pink-500/10 rounded-xl text-pink-600 dark:text-pink-400 shrink-0">
+                            <i data-lucide="network" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100">2. การออกแบบโครงสร้างและสถาปัตยกรรม (Architecture Design)</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                                การทำความเข้าใจว่าระบบส่วนหน้า (Frontend) ส่วนหลัง (Backend) และฐานข้อมูล (Database) เชื่อมต่อกันอย่างไร ทักษะนี้ช่วยให้คุณควบคุม "Vibe" และวางแผนกระบวนการทำงานในภาพรวมได้อย่างมีทิศทาง
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Skill 3 -->
+                    <div class="bg-white dark:bg-slate-900/50 hover:bg-slate-100/50 dark:hover:bg-slate-900/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-purple-500/20 dark:hover:border-purple-500/20 shadow-sm transition-all flex items-start space-x-4">
+                        <div class="p-3 bg-indigo-500/10 rounded-xl text-indigo-600 dark:text-indigo-400 shrink-0">
+                            <i data-lucide="message-square-code" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100">3. วิศวกรรมการป้อนคำสั่ง (Prompt Engineering)</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                                การใช้ภาษาธรรมชาติในการอธิบายความต้องการอย่างลึกซึ้งและเฉียบคม การกำหนดบริบท (Context) ขอบเขตข้อจำกัด และการให้ตัวอย่างผลลัพธ์ (Few-shot Prompting) เพื่อให้ AI สร้างโค้ดที่ต้องการได้ในรอบเดียว
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Skill 4 -->
+                    <div class="bg-white dark:bg-slate-900/50 hover:bg-slate-100/50 dark:hover:bg-slate-900/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-purple-500/20 dark:hover:border-purple-500/20 shadow-sm transition-all flex items-start space-x-4">
+                        <div class="p-3 bg-emerald-500/10 rounded-xl text-emerald-600 dark:text-emerald-400 shrink-0">
+                            <i data-lucide="search-code" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100">4. การอ่านและการตรวจทานโค้ด (Code Reading & Review)</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                                แม้ AI จะเขียนโค้ดให้คุณทั้งหมด แต่คุณต้องมีทักษะในการ "อ่านออกเขียนไม่ได้" คล้ายกับการเป็นบรรณาธิการหนังสือที่ต้องตรวจสอบความถูกต้องของ Logic หาจุดโหว่ด้านความปลอดภัย และระบุดักจับสภาวะการเกิดบั๊กต่างๆ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Skill Simulator (Right) -->
+                <div class="lg:col-span-5 bg-gradient-to-b from-white to-slate-100 dark:from-slate-900 dark:to-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                                <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100">จำลองการกระจายทักษะยุคใหม่</h3>
+                        </div>
+                        <p class="text-xs text-slate-550 dark:text-slate-400 leading-relaxed">
+                            ลองเลื่อนสไลเดอร์เพื่อดูแนวโน้มการเปลี่ยนแปลงของทักษะการเป็นนักพัฒนาในมุมมองของคุณ ระหว่าง "นักเขียนโค้ดดั้งเดิม" กับ "Vibe Coder"
+                        </p>
+
+                        <!-- Slider Inputs -->
+                        <div class="space-y-5 pt-2">
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-xs font-semibold">
+                                    <span class="text-slate-600 dark:text-slate-300">การท่องจำ Syntax และพิมพ์โค้ด (Manual Coding)</span>
+                                    <span class="text-purple-650 dark:text-purple-400 font-bold" id="manual-val">30%</span>
+                                </div>
+                                <input id="manual-slider" type="range" min="0" max="100" value="30" class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-500" oninput="updateSkillBars()">
+                            </div>
+
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-xs font-semibold">
+                                    <span class="text-slate-600 dark:text-slate-300">การคิดเชิงระบบและควบคุมการสื่อสาร (Vibes/Logic)</span>
+                                    <span class="text-pink-600 dark:text-pink-400 font-bold" id="logic-val">70%</span>
+                                </div>
+                                <input id="logic-slider" type="range" min="0" max="100" value="70" class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-pink-500" oninput="updateSkillBars()">
+                            </div>
+                        </div>
+
+                        <!-- Comparison Analysis Box -->
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-2" id="skill-analysis-box">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-purple-700 dark:text-purple-300" id="skill-analysis-title">เน้นความชำนาญในการคุมทิศทาง</h4>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed" id="skill-analysis-desc">
+                                ระดับทักษะของคุณสอดคล้องกับแนวคิด Vibe Coding เป็นส่วนใหญ่ ที่ลดความกังวลในเรื่อง Syntax แล้วผันตัวไปใช้กระบวนการคิดในการวางโครงสร้างและแก้ปัญหาผ่านคำสั่งระดับสูงกับ AI
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-200 dark:border-slate-900 text-center text-xs text-slate-500 flex items-center justify-center space-x-1">
+                        <i data-lucide="info" class="w-4 h-4 text-purple-500 dark:text-purple-400 animate-bounce"></i>
+                        <span>ออกแบบและวิเคราะห์โดยทีมงาน Vibe Coding Academy</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modern Tools Grid -->
+        <section id="tools" class="pt-24 scroll-mt-20">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 dark:border-emerald-500/30 px-3 py-1 rounded-md text-xs text-emerald-700 dark:text-emerald-300 font-medium uppercase tracking-wider mb-3">
+                    เทคโนโลยีที่ช่วยขับเคลื่อน
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+                    เครื่องมือสำหรับ Vibe Coder ยอดนิยม
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400">
+                    เปิดโลกสุดยอดแพลตฟอร์มและ AI ผู้ช่วยพัฒนาในปัจจุบัน ที่พร้อมรับคำสั่งจากคุณ
+                </p>
+            </div>
+
+            <!-- Interactive Tab System for Tools -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-4 space-y-3" id="tab-buttons">
+                    <button onclick="switchTab('cursor')" id="btn-cursor" class="w-full text-left p-4 rounded-xl transition-all duration-200 border bg-gradient-to-r from-purple-500/10 to-transparent border-purple-500/30 text-slate-800 dark:text-white flex items-center justify-between shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-300">
+                                <i data-lucide="edit-3"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">Cursor IDE</h4>
+                                <p class="text-xs text-purple-850 dark:text-purple-200/70">AI Code Editor อันดับ #1</p>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-purple-500 dark:text-purple-400"></i>
+                    </button>
+
+                    <button onclick="switchTab('v0')" id="btn-v0" class="w-full text-left p-4 rounded-xl transition-all duration-200 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900/50 hover:text-slate-800 dark:hover:text-slate-200 flex items-center justify-between shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-pink-500/10 rounded-lg flex items-center justify-center text-pink-600 dark:text-pink-400">
+                                <i data-lucide="layout"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">v0 by Vercel</h4>
+                                <p class="text-xs text-slate-500">สร้างหน้าเว็บและ UI ได้ทันใจ</p>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 dark:text-slate-500"></i>
+                    </button>
+
+                    <button onclick="switchTab('bolt')" id="btn-bolt" class="w-full text-left p-4 rounded-xl transition-all duration-200 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900/50 hover:text-slate-800 dark:hover:text-slate-200 flex items-center justify-between shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-indigo-500/10 rounded-lg flex items-center justify-center text-indigo-650 dark:text-indigo-400">
+                                <i data-lucide="lightning"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">Bolt.new</h4>
+                                <p class="text-xs text-slate-500">Full-Stack ในเบราว์เซอร์เดียว</p>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 dark:text-slate-500"></i>
+                    </button>
+
+                    <button onclick="switchTab('gemini')" id="btn-gemini" class="w-full text-left p-4 rounded-xl transition-all duration-200 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900/50 hover:text-slate-800 dark:hover:text-slate-200 flex items-center justify-between shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400">
+                                <i data-lucide="brain-circuit"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">Gemini (Canvas/API)</h4>
+                                <p class="text-xs text-slate-500">โมเดลสร้างโปรแกรมอัจฉริยะ</p>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 dark:text-slate-500"></i>
+                    </button>
+                </div>
+
+                <!-- Tab Contents Container -->
+                <div class="lg:col-span-8 bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 rounded-2xl relative shadow-sm" id="tab-content-container">
+                    <!-- Tab: Cursor -->
+                    <div id="content-cursor" class="tab-content space-y-6">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">ยอดนิยมที่สุด</span>
+                            <div class="flex space-x-1 text-yellow-500 dark:text-yellow-400">
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold">Cursor - โปรแกรมสร้างโค้ดแบบ Next-Gen</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+                            Cursor เป็น Fork ของ VS Code ที่นำมาผสานรวมฟังก์ชันปัญญาประดิษฐ์ (AI) เข้าไปอย่างลึกซึ้ง สามารถสั่งคำสั่งด้วยฟีเจอร์อย่าง Composer (`Cmd + I` หรือ `Ctrl + I`) เพื่ออัปเดตไฟล์หลายๆ ไฟล์พร้อมกัน หรือแก้ไขปัญหา บล็อกบั๊กของระบบได้ง่ายดายเหมือนกับการสั่งทีมงานผู้เชี่ยวชาญส่วนตัว
+                        </p>
+                        <div class="space-y-3">
+                            <h4 class="font-semibold text-slate-800 dark:text-slate-200">คุณสมบัติเด่น:</h4>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 dark:text-purple-400"></i> <span>Composer แก้ไขไฟล์จำนวนมากพร้อมกัน</span></li>
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 dark:text-purple-400"></i> <span>ระบบ Autocomplete ที่ยอดเยี่ยมและรู้บริบท</span></li>
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 dark:text-purple-400"></i> <span>รองรับการแชทกับโค้ดทั้งหมด (Codebase Search)</span></li>
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 dark:text-purple-400"></i> <span>ใช้งานร่วมกับ VS Code Extensions เดิมได้</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tab: v0 -->
+                    <div id="content-v0" class="tab-content hidden space-y-6">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-pink-500/10 text-pink-700 dark:text-pink-300 border border-pink-500/20">เน้นการพัฒนา UI / UX</span>
+                            <span class="text-slate-500 text-xs">โดย Vercel</span>
+                        </div>
+                        <h3 class="text-2xl font-bold">v0.dev - เปลี่ยนไอเดียสู่หน้าเว็บสุดอลังการ</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+                            เครื่องมือทรงพลังของ Vercel สำหรับนักพัฒนาสายหน้าบ้าน (Front-end) เพียงอธิบายหน้าตา สไตล์ และฟังก์ชันที่คุณต้องการ v0 จะประมวลผลและสร้างโค้ดหน้าตา React, Tailwind CSS และ Lucide Icons ออกมาเป็นรูปธรรมพร้อมใช้งานทันที และยังมีระบบ Preview ผลลัพธ์แบบเรียลไทม์
+                        </p>
+                        <div class="space-y-3">
+                            <h4 class="font-semibold text-slate-800 dark:text-slate-200">คุณสมบัติเด่น:</h4>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-pink-650 dark:text-pink-400"></i> <span>แปลงหน้าจอตัวอย่างหรือรูปภาพเป็น UI หน้าเว็บ</span></li>
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-pink-650 dark:text-pink-400"></i> <span>รองรับ React Component และ Tailwind แบบจัดเต็ม</span></li>
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-pink-650 dark:text-pink-400"></i> <span>สามารถเชื่อมต่อเข้ากับโครงการเพื่อเผยแพร่บน Vercel</span></li>
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-pink-650 dark:text-pink-400"></i> <span>แก้ไขเฉพาะจุดและอัปเดตงานตามคำวิจารณ์ได้</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Bolt -->
+                    <div id="content-bolt" class="tab-content hidden space-y-6">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">Full-Stack Sandbox</span>
+                            <span class="text-slate-550 text-xs">ในเบราว์เซอร์</span>
+                        </div>
+                        <h3 class="text-2xl font-bold">Bolt.new - เอนจิ้น Full-stack ภายในคลิกเดียว</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+                            แพลตฟอร์มที่รวมทุกอย่าง (In-browser dev engine) ตั้งแต่การเขียนโค้ด การคอมไพล์ รันเซิร์ฟเวอร์หลังบ้าน ฐานข้อมูล (Database) และการทำหน้าเว็บโชว์ผลลัพธ์ผ่าน URL ที่แชร์ให้คนอื่นเปิดดูได้ โดยกระบวนการติดตั้งและติดตั้งโมดูลภายนอก ทั้งหมดเป็นไปแบบอัตโนมัติตาม Prompt
+                        </p>
+                        <div class="space-y-3">
+                            <h4 class="font-semibold text-slate-800 dark:text-slate-200">คุณสมบัติเด่น:</h4>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i> <span>สร้างและจัดการโปรเจกต์ Fullstack ด้วย AI</span></li>
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i> <span>ติดตั้ง Package, รันคำสั่ง Terminal แบบจำลองอัตโนมัติ</span></li>
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i> <span>เผยแพร่งานสู่ Production ทันทีหลังเขียนเสร็จ</span></li>
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i> <span>ปรับแต่ง แก้ไข ตรวจบั๊กในคอมมูนิตี้แบบสดๆ</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Gemini -->
+                    <div id="content-gemini" class="tab-content hidden space-y-6">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/20">Intelligence Engine</span>
+                            <span class="text-slate-500 text-xs">ขับเคลื่อนโดย Google</span>
+                        </div>
+                        <h3 class="text-2xl font-bold">Gemini Series - สมองกลอัจฉริยะของเหล่านักพัฒนา</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+                            ตระกูลโมเดลเรือธงอย่าง Gemini 2.5 Flash ที่สามารถสแกน ค้นหา วิเคราะห์สถาปัตยกรรมขนาดใหญ่ ทำงานสเกลที่โค้ดมีความยาวนับแสนบรรทัดได้อย่างมีเสถียรภาพ พร้อมฟังก์ชันการประมวลผลคำสั่งเชิงวิศวกรรม การให้เหตุผลเชิงตรรกะ และการจัดโครงสร้างแบบมีระเบียบ
+                        </p>
+                        <div class="space-y-3">
+                            <h4 class="font-semibold text-slate-800 dark:text-slate-200">คุณสมบัติเด่น:</h4>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i> <span>สถาปัตยกรรมหน้าต่างขนาดใหญ่ (Large Context Window)</span></li>
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i> <span>วิเคราะห์และเขียนโปรแกรมได้ซับซ้อนแม่นยำ</span></li>
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i> <span>รองรับการใช้งานผ่าน Canvas เพื่อแก้ไขงานร่วมกันได้</span></li>
+                                <li class="flex items-center space-x-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i> <span>ปรับแต่งและเทรนเพิ่มเติมง่ายผ่าน API</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive: Vibe Score Calculator -->
+        <section id="vibe-test" class="pt-24 scroll-mt-20">
+            <div class="max-w-4xl mx-auto bg-white dark:bg-slate-950/70 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center mx-auto text-purple-600 dark:text-purple-400 mb-4 border border-purple-500/20">
+                        <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">คุณเป็น Vibe Coder ระดับไหน?</h2>
+                    <p class="text-slate-550 dark:text-slate-400 text-sm sm:text-base mt-2">
+                        ตอบคำถามประเมินด้านล่างเพื่อคำนวณ "Vibe Score" ของตัวคุณเอง
+                    </p>
+                </div>
+
+                <form id="quiz-form" class="space-y-6">
+                    <!-- Question 1 -->
+                    <div class="space-y-3">
+                        <label class="block text-sm sm:text-base font-semibold text-slate-850 dark:text-slate-200">1. เวลาที่แอปพลิเคชันเกิดข้อผิดพลาด (Bug) คุณมักทำอย่างไร?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="flex items-center p-3.5 bg-slate-100/50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer transition-all space-x-3 text-sm">
+                                <input type="radio" name="q1" value="10" class="text-purple-650 focus:ring-purple-500" required>
+                                <span class="text-slate-700 dark:text-slate-300">Copy และแปะ Error log ลง AI แชทในทันทีพร้อมบอก "แก้ให้หน่อย!"</span>
+                            </label>
+                            <label class="flex items-center p-3.5 bg-slate-100/50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer transition-all space-x-3 text-sm">
+                                <input type="radio" name="q1" value="3" class="text-purple-650 focus:ring-purple-500">
+                                <span class="text-slate-700 dark:text-slate-300">เปิด Debugger ไล่ดูตาม Stack Trace และใช้ Print สกรีนดูค่าตัวแปร</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="space-y-3">
+                        <label class="block text-sm sm:text-base font-semibold text-slate-850 dark:text-slate-200">2. ข้อใดคือความเข้าใจของคุณเกี่ยวกับภาษา Python หรือ JavaScript?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="flex items-center p-3.5 bg-slate-100/50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer transition-all space-x-3 text-sm">
+                                <input type="radio" name="q2" value="10" class="text-purple-650 focus:ring-purple-500" required>
+                                <span class="text-slate-700 dark:text-slate-300">เป็นภาษาที่ AI เข้าใจดีมาก ฉันแค่อธิบายว่าจะเอาผลลัพธ์แบบไหนพอ</span>
+                            </label>
+                            <label class="flex items-center p-3.5 bg-slate-100/50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer transition-all space-x-3 text-sm">
+                                <input type="radio" name="q2" value="3" class="text-purple-650 focus:ring-purple-500">
+                                <span class="text-slate-700 dark:text-slate-300">เป็นเครื่องมือที่ฉันต้องเข้าใจไวยากรณ์ ฟังก์ชัน และชนิดตัวแปรอย่างแม่นยำ</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="space-y-3">
+                        <label class="block text-sm sm:text-base font-semibold text-slate-850 dark:text-slate-200">3. เครื่องมือที่คุณเปิดใช้งานและอยู่ด้วยมากที่สุดเวลาสร้างสรรค์เว็บไซต์คือ?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="flex items-center p-3.5 bg-slate-100/50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer transition-all space-x-3 text-sm">
+                                <input type="radio" name="q3" value="10" class="text-purple-650 focus:ring-purple-500" required>
+                                <span class="text-slate-700 dark:text-slate-300">v0.dev, Cursor IDE และ ChatGPT/Claude แถบเครื่องมือพร้อมเขียน Prompt</span>
+                            </label>
+                            <label class="flex items-center p-3.5 bg-slate-100/50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer transition-all space-x-3 text-sm">
+                                <input type="radio" name="q3" value="3" class="text-purple-650 focus:ring-purple-500">
+                                <span class="text-slate-700 dark:text-slate-300">VS Code พื้นหลังโล่งๆ Terminal และค้นหาวิธีแก้ไขที่ Stack Overflow</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="calculateScore()" class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-purple-500/20 flex items-center justify-center gap-2">
+                        <i data-lucide="sparkles" class="w-5 h-5"></i> ประมวลผลลัพธ์
+                    </button>
+                </form>
+
+                <!-- Dynamic Result Panel -->
+                <div id="result-panel" class="hidden mt-8 p-6 bg-slate-100 dark:bg-slate-950/80 border border-purple-500/30 rounded-2xl text-center space-y-4 animate-float">
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100">ผลการประเมินวิถีชีวิตของคุณ</h3>
+                    <div class="flex items-center justify-center">
+                        <div class="relative w-28 h-28 flex items-center justify-center bg-gradient-to-tr from-purple-600 to-pink-500 rounded-full p-1 shadow-lg">
+                            <div class="bg-white dark:bg-slate-950 w-full h-full rounded-full flex flex-col justify-center items-center">
+                                <span class="text-3xl font-extrabold text-slate-800 dark:text-white" id="score-text">0</span>
+                                <span class="text-xs text-slate-550 dark:text-slate-400">เต็ม 30</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="text-lg font-bold text-purple-600 dark:text-purple-400" id="result-title">Vibe Level</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 max-w-lg mx-auto leading-relaxed" id="result-desc">
+                        คุณยังมีวิถีการเขียนโค้ดแบบเดิมอยู่...
+                    </p>
+                    <button onclick="resetQuiz()" class="text-xs text-slate-550 dark:text-slate-400 underline hover:text-slate-800 dark:hover:text-white mt-2">ทำใหม่อีกครั้ง</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive: AI Prompt Builder -->
+        <section id="builder" class="pt-24 scroll-mt-20">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center space-x-2 bg-purple-500/10 border border-purple-500/20 dark:border-purple-500/30 px-3 py-1 rounded-md text-xs text-purple-750 dark:text-purple-300 font-medium uppercase tracking-wider mb-3">
+                    ผู้ช่วยสร้างคำสั่ง Prompt
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+                    Vibe Prompt Builder
+                </h2>
+                <p class="text-slate-650 dark:text-slate-400">
+                    หัวใจสำคัญของการทำ Vibe Coding คือความแม่นยำในการสั่ง AI! ออกแบบและจัดโครงสร้าง Prompt แนะนำเพื่อผลลัพธ์ดีที่สุด
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                <!-- Inputs -->
+                <div class="bg-white dark:bg-slate-900/50 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-6 flex flex-col justify-between shadow-sm">
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                            <i data-lucide="sliders" class="w-5 h-5 text-purple-650 dark:text-purple-400"></i> ปรับจูนค่าโครงสร้างแอปพลิเคชัน
+                        </h3>
+
+                        <!-- Feature Type Selector -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-slate-550 dark:text-slate-400 uppercase tracking-wider">ประเภทโปรเจกต์</label>
+                            <select id="proj-type" class="w-full bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:border-purple-500" onchange="generatePrompt()">
+                                <option value="landing">หน้าเว็บบริษัท / Landing Page</option>
+                                <option value="dashboard">ระบบหลังบ้าน / Dashboard</option>
+                                <option value="game">เกมมินิแบบ 2D (Mini Game)</option>
+                                <option value="portfolio">Portfolio สะสมผลงาน</option>
+                            </select>
+                        </div>
+
+                        <!-- Main Goal Input -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-slate-550 dark:text-slate-400 uppercase tracking-wider">ฟีเจอร์เด่น / ไอเดียที่ต้องการ</label>
+                            <input id="proj-goal" type="text" placeholder="เช่น ระบบสลับหน้าสว่าง/มืด มีแกลเลอรีรูปภาพ หรือระบบตะกร้าสินค้า" value="มีระบบสมัครสมาชิก และปุ่มสลับโหมด Dark/Light" class="w-full bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:border-purple-500" oninput="generatePrompt()">
+                        </div>
+
+                        <!-- Styling Palette Selector -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-slate-550 dark:text-slate-400 uppercase tracking-wider">ชุดสีและการออกแบบ (Vibe/Theme)</label>
+                            <select id="proj-theme" class="w-full bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:border-purple-500" onchange="generatePrompt()">
+                                <option value="cyberpunk">Cyberpunk (นีออน ชมพู-ม่วง-ดำ)</option>
+                                <option value="minimal">Minimal Modern (ขาว-เทา-ดำ สบายตา)</option>
+                                <option value="emerald">Emerald Nature (เขียวธรรมชาติ เรียบหรู)</option>
+                                <option value="ocean">Ocean Tech (น้ำเงิน-ฟ้า สมาร์ท)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Extra Checkbox -->
+                    <div class="flex items-center space-x-2 bg-slate-100/50 dark:bg-slate-950/60 p-3.5 rounded-xl border border-slate-200 dark:border-slate-850">
+                        <input id="proj-responsive" type="checkbox" checked class="w-4 h-4 text-purple-650 focus:ring-purple-500 bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 rounded" onchange="generatePrompt()">
+                        <label for="proj-responsive" class="text-xs text-slate-500 dark:text-slate-400 cursor-pointer">พ่วงระบบ Responsive และใช้ Tailwind CSS เป็นฐานพัฒนา</label>
+                    </div>
+                </div>
+
+                <!-- Result Outputs -->
+                <div class="bg-white dark:bg-slate-900/30 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                                <i data-lucide="file-code" class="w-5 h-5 text-pink-600 dark:text-pink-400"></i> Prompt สำเร็จรูปที่ได้
+                            </h3>
+                            <span class="text-xs text-slate-500">สำหรับนำไปคุยกับ AI</span>
+                        </div>
+                        <div class="bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-4 min-h-[180px] text-slate-700 dark:text-slate-300 font-mono text-xs sm:text-sm leading-relaxed overflow-y-auto max-h-[250px]" id="prompt-output">
+                            <!-- Prompt gets updated dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex flex-col xl:flex-row gap-3">
+                        <button onclick="copyPromptText()" class="w-full py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white font-medium rounded-xl transition-all border border-slate-300 dark:border-slate-700 flex items-center justify-center gap-2 text-sm">
+                            <i data-lucide="copy" class="w-4 h-4"></i> คัดลอก Prompt
+                        </button>
+                        <!-- ✨ Gemini AI Prompt Supercharger Button -->
+                        <button onclick="superchargePromptWithAI()" id="btn-supercharge" class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2 text-sm">
+                            <span id="supercharge-text">✨ ให้ AI ช่วยปรับแต่ง Prompt</span>
+                            <i data-lucide="sparkles" id="supercharge-icon" class="w-4 h-4"></i>
+                        </button>
+                        <div id="copy-toast" class="hidden absolute top-4 right-4 bg-emerald-500/20 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs px-4 py-2.5 rounded-xl flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4"></i> คัดลอกสำเร็จแล้ว!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ✨ NEW: Interactive AI Architect Lab (Gemini-powered Chatbot) -->
+        <section id="ai-architect-section" class="pt-24 scroll-mt-20">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center space-x-2 bg-purple-500/10 border border-purple-500/20 dark:border-purple-500/30 px-3 py-1 rounded-md text-xs text-purple-750 dark:text-purple-300 font-medium uppercase tracking-wider mb-3">
+                    ห้องปฏิบัติการระดมสมอง
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+                    ✨ ห้องแล็บ AI Architect
+                </h2>
+                <p class="text-slate-650 dark:text-slate-400">
+                    อยากสร้างแอปอะไร? ปรึกษาออกแบบสถาปัตยกรรมและโครงสร้างข้อมูลกับ Gemini AI 2.5 ได้แบบเรียลไทม์ที่นี่!
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white dark:bg-slate-900/60 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-lg">
+                <!-- Chat Window Header -->
+                <div class="p-5 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-white">
+                            <i data-lucide="bot" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100">AI Architect (Gemini 2.5)</h4>
+                            <p class="text-xs text-emerald-650 dark:text-emerald-400 flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> พร้อมให้บริการวางโครงสร้าง
+                            </p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-semibold px-2.5 py-1 bg-purple-500/10 text-purple-700 dark:text-purple-300 rounded-full border border-purple-500/25">✨ Powered by Google Gemini</span>
+                </div>
+
+                <!-- Chat Messages Body -->
+                <div id="chat-messages" class="p-6 h-[350px] overflow-y-auto space-y-4 bg-slate-50/50 dark:bg-slate-950/20">
+                    <!-- Bot initial message -->
+                    <div class="flex items-start space-x-3 max-w-[85%]">
+                        <div class="w-8 h-8 rounded-full bg-purple-500/10 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+                            <i data-lucide="bot" class="w-4 h-4"></i>
+                        </div>
+                        <div class="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl rounded-tl-none shadow-sm text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                            <p>สวัสดีชาว Vibe Coder ทุกท่าน! ผมคือ AI Architect อัจฉริยะที่พร้อมช่วยคุณวางแผนสถาปัตยกรรมระบบ โครงสร้างข้อมูล และสร้างชุดคำสั่งเฉพาะเพื่อนำไปพัฒนาซอฟต์แวร์ด้วยเครื่องมืออย่าง Cursor และ v0</p>
+                            <p class="mt-2 font-semibold">ลองถามคำถามทำนองนี้กับผมสิครับ:</p>
+                            <ul class="mt-1 list-disc pl-5 space-y-1 text-xs text-slate-550 dark:text-slate-400">
+                                <li>"ช่วยวิเคราะห์โครงสร้างฐานข้อมูลและระบบสำหรับเว็บบอร์ดขายกาแฟ"</li>
+                                <li>"แนะนำสไตล์การออกแบบสีและ Tailwind คลาสสำหรับแอปจดบันทึกอัจฉริยะ"</li>
+                                <li>"อยากสร้างมินิเกมบนเว็บ 2D คีย์เวิร์ดเด็ดที่สั่ง Cursor ให้ทำสำเร็จในรอบเดียวคืออะไร?"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input Tray -->
+                <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60">
+                    <form id="chat-form" onsubmit="handleSendChat(event)" class="flex gap-3">
+                        <input id="chat-input" type="text" placeholder="พิมพ์ไอเดียแอปพลิเคชันหรือคำถามที่ต้องการถาม..." class="flex-1 bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl px-4 py-3 text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:border-purple-500" required>
+                        <button type="submit" id="btn-chat-send" class="px-5 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold rounded-2xl transition-all shadow-sm flex items-center justify-center gap-2">
+                            <span>✨ ส่ง</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Dev Info Section Extra Card -->
+    <section class="border-t border-slate-200 dark:border-slate-900 bg-slate-100/60 dark:bg-slate-950/60 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-850 dark:text-slate-200">ทีมพัฒนาเว็บไซต์</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">เว็บไซต์แนะนำและเรียนรู้ Vibe Coding คลาสสิกเพื่อเป็นประตูก้าวสู่วิถีโปรแกรมเมอร์ยุคปัญญาประดิษฐ์</p>
+                </div>
+                <div class="flex items-center space-x-3.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 p-4 rounded-2xl shadow-sm">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center font-bold text-white text-lg shadow-sm">
+                        N
+                    </div>
+                    <div class="text-left">
+                        <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200">Nurhidayah mudor-asae</h4>
+                        <p class="text-xs text-purple-650 dark:text-purple-400 font-medium">Full-stack Developer & Vibe Enthusiast</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-100 dark:bg-slate-950 py-8 border-t border-slate-200 dark:border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-550 dark:text-slate-500 space-y-2">
+            <p>&copy; 2026 Vibe Coding Guide. สงวนลิขสิทธิ์ทั้งหมดตามกฎหมาย</p>
+            <p>ออกแบบขึ้นเพื่อสนับสนุนสมาคมนักพัฒนาซอฟต์แวร์ยุค AI | พัฒนาโดย Nurhidayah mudor-asae</p>
+        </div>
+    </footer>
+
+    <!-- Custom Notification Toast Component -->
+    <div id="toast-notification" class="hidden fixed bottom-6 right-6 z-50 p-4 bg-slate-900 dark:bg-white text-white dark:text-slate-950 rounded-2xl border border-slate-850 dark:border-slate-200 flex items-center space-x-3 shadow-2xl max-w-sm transition-all animate-float">
+        <div id="toast-icon-box" class="p-2 rounded-xl bg-purple-500/20 text-purple-400 dark:text-purple-600">
+            <i data-lucide="info" id="toast-icon" class="w-5 h-5"></i>
+        </div>
+        <div>
+            <p id="toast-text" class="text-xs sm:text-sm font-medium">ข้อความแจ้งเตือน</p>
+        </div>
+    </div>
+
+    <!-- Interactive Scripts logic -->
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // Custom Notification Toast Function (Replaces alert)
+        function showNotification(message, isError = false) {
+            const toast = document.getElementById('toast-notification');
+            const toastText = document.getElementById('toast-text');
+            const iconBox = document.getElementById('toast-icon-box');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastText.innerText = message;
+            if (isError) {
+                iconBox.className = "p-2 rounded-xl bg-red-500/20 text-red-500";
+                toastIcon.setAttribute('data-lucide', 'alert-triangle');
+            } else {
+                iconBox.className = "p-2 rounded-xl bg-purple-500/20 text-purple-500";
+                toastIcon.setAttribute('data-lucide', 'check-circle');
+            }
+            lucide.createIcons();
+
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4500);
+        }
+
+        // Theme Toggle Logic (Day/Night Mode)
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeBtnIcon = document.getElementById('theme-btn-icon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeBtnIcon.setAttribute('data-lucide', 'moon');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeBtnIcon.setAttribute('data-lucide', 'sun');
+            }
+            // Re-render Lucide icons
+            lucide.createIcons();
+        }
+
+        // On load theme check
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            const themeBtnIcon = document.getElementById('theme-btn-icon');
+            
+            if (savedTheme === 'light') {
+                document.documentElement.classList.remove('dark');
+                themeBtnIcon.setAttribute('data-lucide', 'moon');
+            } else {
+                document.documentElement.classList.add('dark');
+                themeBtnIcon.setAttribute('data-lucide', 'sun');
+            }
+            lucide.createIcons();
+        });
+
+        // Responsive Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconOpen = document.getElementById('menu-icon-open');
+        const menuIconClose = document.getElementById('menu-icon-close');
+
+        menuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIconOpen.classList.add('hidden');
+                menuIconClose.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            }
+        });
+
+        // Sticky and shrink navbar background on scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.remove('sm:h-20');
+                header.classList.add('sm:h-16', 'shadow-lg');
+            } else {
+                header.classList.add('sm:h-20');
+                header.classList.remove('sm:h-16', 'shadow-lg');
+            }
+        });
+
+        // Interactive Skill Slider Simulation
+        function updateSkillBars() {
+            const manualSlider = document.getElementById('manual-slider');
+            const logicSlider = document.getElementById('logic-slider');
+            const manualVal = document.getElementById('manual-val');
+            const logicVal = document.getElementById('logic-val');
+
+            const manual = parseInt(manualSlider.value);
+            const logic = parseInt(logicSlider.value);
+
+            manualVal.innerText = manual + "%";
+            logicVal.innerText = logic + "%";
+
+            // Analysis text update based on values
+            const analysisTitle = document.getElementById('skill-analysis-title');
+            const analysisDesc = document.getElementById('skill-analysis-desc');
+
+            if (logic > manual && logic >= 60) {
+                analysisTitle.innerText = "เน้นความชำนาญในการคุมทิศทาง 🌌";
+                analysisTitle.className = "text-xs font-bold uppercase tracking-wider text-purple-700 dark:text-purple-300";
+                analysisDesc.innerText = "ระดับทักษะของคุณสอดคล้องกับแนวคิด Vibe Coding เป็นส่วนใหญ่ ที่ลดความกังวลในเรื่อง Syntax แล้วผันตัวไปใช้กระบวนการคิดในการวางโครงสร้างและแก้ปัญหาผ่านคำสั่งระดับสูงกับ AI";
+            } else if (manual > logic && manual >= 60) {
+                analysisTitle.innerText = "เน้นทักษะงานช่างฝีมือ (Classic Coder) 🏛️";
+                analysisTitle.className = "text-xs font-bold uppercase tracking-wider text-pink-650 dark:text-pink-300";
+                analysisDesc.innerText = "คุณเชื่อมั่นในการควบคุมโค้ดทุกบรรทัดด้วยตนเอง ซึ่งเป็นเรื่องดีมากในการทำความเข้าใจจุดลึกๆ ของโปรแกรมเมอร์แบบดั้งเดิม แต่อย่าลืมเปิดรับการใช้ AI เสริมพลังเพื่อความรวดเร็วด้วยล่ะ!";
+            } else {
+                analysisTitle.innerText = "นักพัฒนาสายลูกผสม (Hybrid Engineer) 🏄‍♂️";
+                analysisTitle.className = "text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-300";
+                analysisDesc.innerText = "คุณผสานสองโลกได้อย่างสมดุล! ทั้งเชี่ยวชาญการอ่านเขียนด้วยตนเองเมื่อจำเป็น และใช้การวางสถาปัตยกรรมระดับกว้างกับ AI เมื่อต้องการความเร็วในการขยายสเกลงาน";
+            }
+        }
+
+        // Tabs switching system for tools
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+
+            // Show current content
+            const activeContent = document.getElementById(`content-${tabId}`);
+            if (activeContent) {
+                activeContent.classList.remove('hidden');
+            }
+
+            // Update tab buttons styles
+            const buttons = document.querySelectorAll('#tab-buttons button');
+            buttons.forEach(btn => {
+                btn.className = "w-full text-left p-4 rounded-xl transition-all duration-200 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900/50 hover:text-slate-800 dark:hover:text-slate-200 flex items-center justify-between";
+                // Reset right icons color
+                const icon = btn.querySelector('[data-lucide="chevron-right"]');
+                if (icon) icon.className = "w-5 h-5 text-slate-500";
+            });
+
+            // Set dynamic primary color based on tool select
+            let activeColorClass = "border-purple-500/30 bg-gradient-to-r from-purple-500/10 to-transparent dark:text-white";
+            let activeIconColor = "w-5 h-5 text-purple-600 dark:text-purple-400";
+            
+            if (tabId === 'v0') {
+                activeColorClass = "border-pink-500/30 bg-gradient-to-r from-pink-500/10 to-transparent dark:text-white";
+                activeIconColor = "w-5 h-5 text-pink-600 dark:text-pink-400";
+            } else if (tabId === 'bolt') {
+                activeColorClass = "border-indigo-500/30 bg-gradient-to-r from-indigo-500/10 to-transparent dark:text-white";
+                activeIconColor = "w-5 h-5 text-indigo-600 dark:text-indigo-400";
+            } else if (tabId === 'gemini') {
+                activeColorClass = "border-blue-500/30 bg-gradient-to-r from-blue-500/10 to-transparent dark:text-white";
+                activeIconColor = "w-5 h-5 text-blue-600 dark:text-blue-400";
+            }
+
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.className = `w-full text-left p-4 rounded-xl transition-all duration-200 border ${activeColorClass} flex items-center justify-between shadow-sm`;
+                const activeIcon = activeBtn.querySelector('[data-lucide="chevron-right"]');
+                if (activeIcon) activeIcon.className = activeIconColor;
+            }
+        }
+
+        // Vibe Quiz system
+        function calculateScore() {
+            const form = document.getElementById('quiz-form');
+            const data = new FormData(form);
+            let totalScore = 0;
+            let answeredCount = 0;
+
+            for (let value of data.values()) {
+                totalScore += parseInt(value);
+                answeredCount++;
+            }
+
+            if (answeredCount < 3) {
+                showNotification('กรุณาตอบคำถามให้ครบทุกข้อก่อนการประเมินครับ!', true);
+                return;
+            }
+
+            // Display Results
+            const resultPanel = document.getElementById('result-panel');
+            const scoreText = document.getElementById('score-text');
+            const resultTitle = document.getElementById('result-title');
+            const resultDesc = document.getElementById('result-desc');
+
+            resultPanel.classList.remove('hidden');
+            scoreText.innerText = totalScore;
+
+            if (totalScore >= 25) {
+                resultTitle.innerText = "ระดับ: Ultimate Vibe Master 🌌";
+                resultDesc.innerText = "คุณคือสุดยอดโปรแกรมเมอร์ยุคใหม่ ปล่อยให้ AI พิมพ์โค้ดส่วนใหญ่แล้วคอยจัดแจงหน้าเว็บแบบชิวๆ คุณมีทักษะการเป็น Software Architect ที่เก่งกาจและมีความรวดเร็วเป็นเลิศ!";
+                resultTitle.className = "text-xl font-bold text-purple-600 dark:text-purple-400";
+            } else if (totalScore >= 15) {
+                resultTitle.innerText = "ระดับ: Vibe Explorer 🏄‍♂️";
+                resultDesc.innerText = "คุณกำลังเรียนรู้และเริ่มเปิดใจรับเทคโนโลยี AI มาช่วยในการพัฒนาบางส่วน แต่อาจจะยังอยากพึ่งพาการแกะโค้ดเองในบางจุด ลองปรับสมดุลเพื่อให้ทักษะทำงานได้อย่างว่องไวและสบายขึ้นนะ!";
+                resultTitle.className = "text-xl font-bold text-indigo-600 dark:text-indigo-400";
+            } else {
+                resultTitle.innerText = "ระดับ: Classical Developer 🏛️";
+                resultDesc.innerText = "คุณคือนักพัฒนาสายอนุรักษนิยมที่รักในความถูกต้อง รักความแม่นยำของวงเล็บและการไล่ Stack Trace อย่างละเมียดละไม แม้อาจจะทำงานช้ากว่า Vibe Coder ในการขึ้นต้นแบบ แต่คุณรู้ลึกรู้จริงแน่นอน!";
+                resultTitle.className = "text-xl font-bold text-slate-700 dark:text-slate-300";
+            }
+
+            // Scroll Smooth to Result Panel
+            resultPanel.scrollIntoView({ behavior: 'smooth' });
+            showNotification('ประเมินระดับ Vibe สำเร็จแล้ว!', false);
+        }
+
+        function resetQuiz() {
+            document.getElementById('quiz-form').reset();
+            document.getElementById('result-panel').classList.add('hidden');
+            document.getElementById('vibe-test').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Prompt Builder Generator
+        function generatePrompt() {
+            const type = document.getElementById('proj-type').value;
+            const goal = document.getElementById('proj-goal').value || "...";
+            const theme = document.getElementById('proj-theme').value;
+            const resChecked = document.getElementById('proj-responsive').checked;
+
+            let themeDesc = "";
+            switch (theme) {
+                case "cyberpunk": themeDesc = "ดีไซน์แนวล้ำยุค Cyberpunk ใช้ธีมสีเข้ม (Dark mode) โดดเด่นด้วยโทนสีชมพูนีออน, สีม่วงนีออน และเส้นขอบเงาแวววาว (neon-glow)"; break;
+                case "minimal": themeDesc = "ดีไซน์แบบ Minimalist มินิมอลที่ดูโมเดิร์นและกว้าง สบายตา เน้นสีโทนขาว, เทาอ่อน, เส้นตัดขอบบางเบา และความโปร่งใสแบบกระจก (Glassmorphism)"; break;
+                case "emerald": themeDesc = "ดีไซน์สไตล์ธรรมชาติแนวพรีเมียม (Emerald/Sage) ใช้สีหลักเป็นสีเขียวมรกต สีทองอ่อน คลีนๆ สบายตา และมีระยะห่างที่ดี (ample whitespace)"; break;
+                case "ocean": themeDesc = "ดีไซน์โมเดิร์นคลีนแนวสตาร์ทอัพเทคโนโลยี (Ocean Tech) เน้นใช้สีน้ำเงินกรมท่า สีฟ้าคราม ผสมกับตัวหนังสือสีขาวและสีเงินเงาดูสว่างสดใส"; break;
+            }
+
+            let responseString = `สร้าง ${type === 'landing' ? 'หน้าแรก Landing Page' : type === 'dashboard' ? 'แดชบอร์ดหลังบ้าน' : type === 'game' ? 'เกมแบบเว็บบนเบราว์เซอร์' : 'หน้า Portfolio แนะนำตัว'} โดยใช้เทคโนโลยี Single File HTML5\n`;
+            responseString += `และตกแต่งด้วย Tailwind CSS มีฟีเจอร์เด่นดังนี้: "${goal}"\n\n`;
+            responseString += `รายละเอียดสไตล์:\n`;
+            responseString += `- ${themeDesc}\n`;
+            
+            if (resChecked) {
+                responseString += `- ต้องเป็นแบบ Responsive เต็มรูปแบบ รองรับทั้งมือถือ แท็บเล็ต และหน้าจอคอมพิวเตอร์\n`;
+                responseString += `- ใช้ Lucide Icons สัญลักษณ์ที่สวยงามและตรงสไตล์ความชอบ\n`;
+                responseString += `- โครงสร้างเว็บบอร์ดต้องสะอาด รองรับปฏิสัมพันธ์ที่ลื่นไหลจากทางฝั่งผู้ใช้งาน\n`;
+            }
+
+            document.getElementById('prompt-output').innerText = responseString;
+        }
+
+        // Copy text helper
+        function copyPromptText() {
+            const outputText = document.getElementById('prompt-output').innerText;
+            const textarea = document.createElement('textarea');
+            textarea.value = outputText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            // Toast Alert for Copying
+            const toast = document.getElementById('copy-toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 2500);
+            showNotification('คัดลอก Prompt ไปยัง Clipboard แล้ว!', false);
+        }
+
+        // --- GEMINI API INTEGRATIONS ---
+
+        // Robust fetch helper with exponential backoff
+        async function callGemini(userMessage, systemPrompt = "") {
+            const apiKey = ""; // runtime-provided
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: userMessage }] }]
+            };
+            if (systemPrompt) {
+                payload.systemInstruction = { parts: [{ text: systemPrompt }] };
+            }
+
+            let currentDelay = 1000;
+            for (let attempt = 0; attempt < 5; attempt++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    if (response.ok) {
+                        const json = await response.json();
+                        return json.candidates?.[0]?.content?.parts?.[0]?.text || "ไม่มีข้อเสนอแนะเพิ่มเติมจาก AI";
+                    }
+                } catch (e) {
+                    // Retry on network failures
+                }
+                await new Promise(resolve => setTimeout(resolve, currentDelay));
+                currentDelay *= 2;
+            }
+            throw new Error("ระบบขาดการเชื่อมต่อกับสมองกล AI ชั่วคราว กรุณาลองตรวจสอบสัญญาณและลองใหม่อีกครั้งครับ");
+        }
+
+        // ✨ AI Prompt Supercharger: Call Gemini to expand on the base template and output a pro-level developer prompt
+        async function superchargePromptWithAI() {
+            const btn = document.getElementById('btn-supercharge');
+            const btnText = document.getElementById('supercharge-text');
+            const currentPromptText = document.getElementById('prompt-output').innerText;
+
+            btn.disabled = true;
+            btnText.innerText = "✨ กำลังขัดเกลา Prompt โดย AI...";
+            showNotification('กำลังให้ Gemini API ขัดเกลาคำสั่งสำหรับโปรเจกต์ของคุณ...', false);
+
+            const systemPrompt = "คุณคือสุดยอดวิศวกรข้อความ (Prompt Engineer) อัจฉริยะที่เชี่ยวชาญการใช้เครื่องมือกลุ่ม Cursor, v0, และ Bolt.new หน้าที่ของคุณคือรับโครงร่างคำสั่งแบบย่อของผู้ใช้ แล้วขยายความ ปรับโครงสร้าง เพิ่มเติมข้อกำหนดเชิงเทคนิค และสไตล์การออกแบบที่สวยงามโดดเด่น ให้โปรแกรม AI ตัวอื่นเขียนโค้ดออกมาได้สมบูรณ์และไม่มีที่ติที่สุด เขียนตอบเป็นภาษาอังกฤษอย่างเป็นทางการและชัดเจนเพื่อนำไปใช้สั่งการ AI";
+
+            try {
+                const superchargedResult = await callGemini(
+                    `ขยายความและปรับแต่ง Prompt ต่อไปนี้ให้อลังการและเหมาะสมสูงสุด:\n\n${currentPromptText}`,
+                    systemPrompt
+                );
+                document.getElementById('prompt-output').innerText = superchargedResult;
+                showNotification('✨ อัปเกรดระบบ Prompt สำเร็จแล้วด้วย AI!', false);
+            } catch (err) {
+                showNotification(err.message, true);
+            } finally {
+                btn.disabled = false;
+                btnText.innerText = "✨ ให้ AI ช่วยปรับแต่ง Prompt";
+            }
+        }
+
+        // ✨ AI Chat Architect System
+        async function handleSendChat(event) {
+            event.preventDefault();
+            const inputEl = document.getElementById('chat-input');
+            const chatBox = document.getElementById('chat-messages');
+            const sendBtn = document.getElementById('btn-chat-send');
+            const userMsg = inputEl.value.trim();
+
+            if (!userMsg) return;
+
+            // Render User Bubble
+            renderMessageBubble(userMsg, true);
+            inputEl.value = "";
+            sendBtn.disabled = true;
+
+            // Render Loading Bubble
+            const loadingId = "msg-loading-" + Date.now();
+            renderLoadingBubble(loadingId);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            const systemPrompt = "คุณคือ AI Vibe Architect ผู้เชี่ยวชาญระดับตำนานด้านการขึ้นโครงร่างโครงการเว็บบนเบราว์เซอร์แบบ Vibe Coding หน้าที่ของคุณคือให้คำแนะนำเชิงตรรกะ ตัวแปรสเตทที่จำเป็นใน React/JS, สไตล์ CSS สีสันแนว Tailwind และเตรียม Prompt ลำดับ 1, 2, 3 ให้ผู้ใช้คัดลอกไปป้อนใส่ Cursor หรือ v0 ได้อย่างลื่นไหล ตอบผู้ใช้ด้วยภาษาไทยที่ทันสมัย สุภาพ ใส่สาระครบถ้วน และส่งเสริมความคิดสร้างสรรค์";
+
+            try {
+                const aiResult = await callGemini(userMsg, systemPrompt);
+                removeBubble(loadingId);
+                renderMessageBubble(aiResult, false);
+            } catch (err) {
+                removeBubble(loadingId);
+                renderMessageBubble(`ขออภัยด้วยครับ: ${err.message}`, false, true);
+            } finally {
+                sendBtn.disabled = false;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        function renderMessageBubble(text, isUser = false, isError = false) {
+            const container = document.getElementById('chat-messages');
+            const bubbleWrap = document.createElement('div');
+            
+            if (isUser) {
+                bubbleWrap.className = "flex items-start justify-end space-x-3 max-w-[85%] ml-auto";
+                bubbleWrap.innerHTML = `
+                    <div class="p-4 bg-purple-600 text-white rounded-2xl rounded-tr-none shadow-sm text-sm leading-relaxed">
+                        ${escapeHtml(text)}
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center shrink-0">
+                        <i data-lucide="user" class="w-4 h-4 text-purple-600 dark:text-purple-400"></i>
+                    </div>
+                `;
+            } else {
+                bubbleWrap.className = "flex items-start space-x-3 max-w-[85%]";
+                bubbleWrap.innerHTML = `
+                    <div class="w-8 h-8 rounded-full ${isError ? 'bg-red-500/15' : 'bg-purple-500/10 dark:bg-purple-500/20'} ${isError ? 'text-red-500' : 'text-purple-600 dark:text-purple-400'} flex items-center justify-center shrink-0">
+                        <i data-lucide="${isError ? 'alert-triangle' : 'bot'}" class="w-4 h-4"></i>
+                    </div>
+                    <div class="p-4 ${isError ? 'bg-red-500/10 border-red-500/20 text-red-700 dark:text-red-400' : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'} rounded-2xl rounded-tl-none shadow-sm text-sm leading-relaxed overflow-x-auto whitespace-pre-line">
+                        ${isError ? escapeHtml(text) : parseMarkdownLike(text)}
+                    </div>
+                `;
+            }
+            container.appendChild(bubbleWrap);
+            lucide.createIcons();
+        }
+
+        function renderLoadingBubble(loadingId) {
+            const container = document.getElementById('chat-messages');
+            const bubbleWrap = document.createElement('div');
+            bubbleWrap.id = loadingId;
+            bubbleWrap.className = "flex items-start space-x-3 max-w-[85%]";
+            bubbleWrap.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-purple-500/10 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+                    <i data-lucide="bot" class="w-4 h-4"></i>
+                </div>
+                <div class="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-400 rounded-2xl rounded-tl-none shadow-sm text-sm flex items-center space-x-2">
+                    <div class="flex space-x-1">
+                        <div class="w-2.5 h-2.5 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-2.5 h-2.5 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                        <div class="w-2.5 h-2.5 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+                    </div>
+                    <span>กำลังระดมสมองวิเคราะห์ผ่าน Gemini...</span>
+                </div>
+            `;
+            container.appendChild(bubbleWrap);
+            lucide.createIcons();
+        }
+
+        function removeBubble(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        // Helper: Simple HTML escaping
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Helper: Format code blocks and simple bold text in chat answers
+        function parseMarkdownLike(text) {
+            let processed = text;
+            
+            // Bold parser
+            processed = processed.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Inline code parser
+            processed = processed.replace(/`(.*?)`/g, '<code class="bg-slate-100 dark:bg-slate-950 px-1.5 py-0.5 rounded text-purple-600 dark:text-purple-400 font-mono text-xs">$1</code>');
+            
+            return processed;
+        }
+
+        // Initialize Prompt on start
+        generatePrompt();
+    </script>
+</body>
+</html>
